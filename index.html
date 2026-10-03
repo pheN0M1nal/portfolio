@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noman Ashraf</title>
+<meta name="description" content="Noman Ashraf, payments and integrations engineer. Stripe, Airwallex and NetSuite, automated reconciliation, remote with EU/US hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one reading column on light paper, case studies as ledger entries (meta left, story right), one flow diagram as the visual centre. */
+:root {
+  --paper: #FAFAF7;
+  --card: #FFFFFF;
+  --ink: #1B1F1D;
+  --muted: #5C6560;
+  --rule: #E2E5DF;
+  --accent: #1E6B52;
+  --accent-soft: #E7F1EC;
+  --serif: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --wrap: 1040px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121614; --card: #181D1B; --ink: #E8ECE9; --muted: #9AA39E;
+    --rule: #2A312E; --accent: #72C4A2; --accent-soft: #1B2B24; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121614; --card: #181D1B; --ink: #E8ECE9; --muted: #9AA39E;
+  --rule: #2A312E; --accent: #72C4A2; --accent-soft: #1B2B24; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--serif); font-size: 1.125rem; line-height: 1.6;
+  font-optical-sizing: auto;
+  padding-inline: clamp(16px, 5vw, 48px);
+}
+.wrap { max-width: var(--wrap); margin-inline: auto; }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { text-wrap: balance; font-weight: 500; margin: 0; }
+p { margin: 0; }
+.label {
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* nav */
+nav { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-block: 28px; flex-wrap: wrap; }
+nav .name { font-weight: 600; font-size: 1.05rem; text-decoration: none; }
+nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: 0.8rem; }
+nav ul a { text-decoration: none; color: var(--muted); }
+nav ul a:hover { color: var(--accent); }
+
+/* hero */
+.hero { padding-block: clamp(40px, 9vw, 96px) clamp(40px, 7vw, 72px); display: grid; gap: 28px; }
+.hero h1 {
+  font-size: clamp(2.4rem, 6.2vw, 4.4rem); line-height: 1.05; letter-spacing: -0.02em;
+  max-width: 17ch; font-weight: 400;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero .lede { max-width: 58ch; color: var(--muted); font-size: 1.2rem; }
+.hero .lede strong { color: var(--ink); font-weight: 500; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn {
+  font-family: var(--mono); font-size: 0.85rem; text-decoration: none;
+  padding: 11px 18px; border-radius: 999px; border: 1px solid var(--ink);
+  display: inline-flex; gap: 8px; align-items: center;
+}
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn:hover { border-color: var(--accent); }
+.status { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+/* ledger figures */
+.figures {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-block: 1px solid var(--rule);
+}
+.figure { padding: 22px 20px 22px 0; display: grid; gap: 4px; }
+.figure + .figure { padding-left: 20px; border-left: 1px solid var(--rule); }
+.figure b { font-family: var(--mono); font-weight: 500; font-size: clamp(1.4rem, 3vw, 1.9rem); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.figure span { font-size: 0.95rem; color: var(--muted); line-height: 1.35; }
+@media (max-width: 720px) {
+  .figures { grid-template-columns: 1fr 1fr; }
+  .figure:nth-child(3) { padding-left: 0; border-left: 0; }
+  .figure:nth-child(n+3) { border-top: 1px solid var(--rule); }
+}
+
+/* sections */
+section { padding-block: clamp(56px, 9vw, 96px) 0; }
+.section-head { display: grid; gap: 10px; margin-bottom: 36px; }
+.section-head h2 { font-size: clamp(1.8rem, 3.6vw, 2.5rem); letter-spacing: -0.01em; }
+.section-head p { color: var(--muted); max-width: 60ch; }
+
+/* diagram */
+.diagram { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 24px; margin-bottom: 56px; }
+.diagram figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.diagram figcaption p { font-size: 0.95rem; color: var(--muted); max-width: 52ch; }
+.diagram .scroll { overflow-x: auto; }
+.diagram svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.n rect { fill: var(--paper); stroke: var(--rule); stroke-width: 1.2; }
+.n.core rect { fill: var(--accent-soft); stroke: var(--accent); }
+.n text { font-family: var(--mono); font-size: 12.5px; fill: var(--ink); }
+.n text.sub { fill: var(--muted); font-size: 11px; }
+.edge { fill: none; stroke: var(--muted); stroke-width: 1.3; }
+.edge.live { stroke: var(--accent); stroke-dasharray: 5 6; animation: flow 1.6s linear infinite; }
+.edge-label { font-family: var(--mono); font-size: 11px; fill: var(--accent); }
+.arrow { fill: var(--muted); }
+.arrow.live { fill: var(--accent); }
+@keyframes flow { to { stroke-dashoffset: -22; } }
+@media (prefers-reduced-motion: reduce) { .edge.live { animation: none; } }
+
+/* case studies */
+.cases { display: grid; }
+.case {
+  display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 20px 48px;
+  padding-block: 40px; border-top: 1px solid var(--rule);
+}
+.case:last-child { border-bottom: 1px solid var(--rule); }
+.case-meta { display: grid; gap: 10px; align-content: start; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--mono); font-size: 0.72rem; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--rule); color: var(--muted); }
+.case h3 { font-size: clamp(1.4rem, 2.6vw, 1.75rem); line-height: 1.2; margin-bottom: 18px; }
+.case-body { min-width: 0; display: grid; gap: 18px; max-width: 66ch; }
+.case dl { margin: 0; display: grid; gap: 14px; }
+.case dt { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.case dd { margin: 4px 0 0; }
+.case ul { margin: 6px 0 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.case ul li::marker { color: var(--accent); }
+.result {
+  display: flex; gap: 12px; align-items: baseline; padding: 14px 16px;
+  background: var(--accent-soft); border-radius: 10px;
+}
+.result .label { color: var(--accent); flex-shrink: 0; }
+@media (max-width: 760px) { .case { grid-template-columns: 1fr; } }
+
+.also { margin-top: 28px; color: var(--muted); max-width: 66ch; font-size: 1rem; }
+
+/* experience */
+.roles { display: grid; }
+.role { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 8px 48px; padding-block: 26px; border-top: 1px solid var(--rule); }
+.role:last-child { border-bottom: 1px solid var(--rule); }
+.role .when { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.role h3 { font-size: 1.3rem; }
+.role h3 span { color: var(--muted); font-weight: 400; }
+.role p { color: var(--muted); margin-top: 6px; max-width: 64ch; }
+@media (max-width: 760px) { .role { grid-template-columns: 1fr; } }
+
+.stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 44px; }
+.stack div { display: grid; gap: 8px; align-content: start; }
+.stack p { font-size: 1rem; }
+
+/* contact */
+.contact { padding-block: clamp(64px, 10vw, 112px); display: grid; gap: 24px; }
+.contact h2 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 400; letter-spacing: -0.02em; max-width: 18ch; line-height: 1.1; }
+.contact p { color: var(--muted); max-width: 56ch; }
+.email-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.email { font-family: var(--mono); font-size: clamp(1rem, 2.4vw, 1.25rem); user-select: all; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); overflow-wrap: anywhere; }
+button.btn { background: none; color: var(--ink); cursor: pointer; }
+footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="name" href="#top">Noman Ashraf</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <p class="label">Payments &amp; Integrations Engineer</p>
+    <h1>I build payment systems that <em>reconcile themselves.</em></h1>
+    <p class="lede">For 2.5 years I owned payments at <strong>Nivoda</strong>, a B2B marketplace selling into 70+ countries: <strong>Stripe, Airwallex and NetSuite</strong> integrations end to end, and a reconciliation engine that replaced a fully manual process. Node.js, TypeScript, PostgreSQL, Kafka.</p>
+    <div class="actions">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn" href="assets/Noman_Ashraf_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+      <span class="status">Remote from Pakistan · EU &amp; US hours</span>
+    </div>
+  </header>
+
+  <div class="figures" role="list">
+    <div class="figure" role="listitem"><b>20,000+</b><span>payments a week through systems I owned</span></div>
+    <div class="figure" role="listitem"><b>70–80%</b><span>of reconciliation automated, from zero</span></div>
+    <div class="figure" role="listitem"><b>10+</b><span>currencies captured and settled</span></div>
+    <div class="figure" role="listitem"><b>3</b><span>providers integrated: Stripe, Airwallex, NetSuite</span></div>
+  </div>
+
+  <section id="work">
+    <div class="section-head">
+      <p class="label">Selected work · Nivoda, 2023–2026</p>
+      <h2>Case studies</h2>
+      <p>Four projects from the payments side of a high-volume marketplace. Each one started with something a person had to do by hand.</p>
+    </div>
+
+    <figure class="diagram">
+      <figcaption>
+        <span class="label">How reconciliation works</span>
+        <p>Provider events arrive through webhooks, go onto a queue, and the engine matches each payment to open invoices. Anything it can't settle goes to people, with an alert.</p>
+      </figcaption>
+      <div class="scroll">
+        <svg viewBox="0 0 860 250" role="img" aria-label="Flow: Stripe and Airwallex webhooks go to a Kafka queue, then to the reconciliation engine. 70 to 80 percent are auto-settled against invoices and synced to NetSuite; the rest go to a manual dashboard with alerts to the AR team.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="ahl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow live" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+
+          <g class="n"><rect x="10" y="95" width="170" height="62" rx="10"/><text x="26" y="121">Stripe · Airwallex</text><text class="sub" x="26" y="141">webhooks, callbacks</text></g>
+          <g class="n"><rect x="230" y="95" width="150" height="62" rx="10"/><text x="246" y="121">Kafka queue</text><text class="sub" x="246" y="141">idempotent events</text></g>
+          <g class="n core"><rect x="430" y="88" width="180" height="76" rx="10"/><text x="446" y="117">Reconciliation</text><text x="446" y="135">engine</text><text class="sub" x="446" y="153">payment → invoices</text></g>
+          <g class="n"><rect x="670" y="18" width="180" height="70" rx="10"/><text x="686" y="45">Auto-settled</text><text class="sub" x="686" y="66">invoices paid → NetSuite</text></g>
+          <g class="n"><rect x="670" y="164" width="180" height="70" rx="10"/><text x="686" y="191">Manual dashboard</text><text class="sub" x="686" y="212">AR team alerted</text></g>
+
+          <path class="edge live" d="M180,126 L226,126" marker-end="url(#ahl)"/>
+          <path class="edge live" d="M380,126 L426,126" marker-end="url(#ahl)"/>
+          <path class="edge live" d="M610,112 C640,112 640,53 666,53" marker-end="url(#ahl)"/>
+          <path class="edge" d="M610,140 C640,140 640,199 666,199" marker-end="url(#ah)"/>
+          <text class="edge-label" x="618" y="78">70–80%</text>
+          <text class="edge-label" x="618" y="186" style="fill: var(--muted)">the rest</text>
+        </svg>
+      </div>
+    </figure>
+
+    <div class="cases">
+      <article class="case">
+        <div class="case-meta">
+          <span class="label">Airwallex · Kafka · Datadog</span>
+          <div class="tags"><span class="tag">integration</span><span class="tag">architecture</span></div>
+        </div>
+        <div class="case-body">
+          <h3>Airwallex integration and automated reconciliation</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Reconciliation was done entirely by hand, and payment processing was tangled into invoice and order code inside the monolith. It was hard to monitor and hard to scale.</dd></div>
+            <div><dt>What I built</dt><dd><ul>
+              <li>Integrated Airwallex as a payment provider and built automatic matching between payments and invoices.</li>
+              <li>Moved payment processing out of the monolith into its own service, with Kafka events between the payment, invoice and order flows.</li>
+              <li>Generated Airwallex payment links automatically when an order is created, and published events for downstream services.</li>
+              <li>Extended the service to Airwallex Global Accounts and multiple Airwallex entities.</li>
+              <li>Added Datadog monitoring with Slack alerts for the payment service.</li>
+            </ul></dd></div>
+          </dl>
+          <p class="result"><span class="label">Result</span><span>The manual reconciliation process was retired, and payments became a service the team could watch and scale on its own.</span></p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="label">Node.js · PostgreSQL</span>
+          <div class="tags"><span class="tag">reconciliation</span><span class="tag">edge cases</span></div>
+        </div>
+        <div class="case-body">
+          <h3>Reconciliation V2: one payment, many invoices</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Customers often paid several invoices in one transfer into a global account. Combined with partial payments and inconsistent callbacks, these still needed a person to sort out.</dd></div>
+            <div><dt>What I built</dt><dd><ul>
+              <li>A second version of the engine that settles a single payment across multiple invoices, by checking due invoices against settled amounts.</li>
+              <li>Handling for more callback scenarios and payment edge cases.</li>
+              <li>A manual reconciliation dashboard for anything the engine can't settle.</li>
+              <li>Alerts to the accounts receivable team, so unresolved payments get flagged.</li>
+            </ul></dd></div>
+          </dl>
+          <p class="result"><span class="label">Result</span><span>70–80% of reconciliation now runs automatically. The rest reaches a person with context.</span></p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="label">Stripe · Datadog</span>
+          <div class="tags"><span class="tag">expansion</span><span class="tag">reliability</span></div>
+        </div>
+        <div class="case-body">
+          <h3>Stripe expansion to the UAE and Saudi Arabia</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Stripe was live in the US, UK and EU. Launching in two new regions meant supporting local payment methods and being ready for a jump in volume on day one.</dd></div>
+            <div><dt>What I built</dt><dd><ul>
+              <li>Region-specific payment methods on top of the existing Stripe integration.</li>
+              <li>Capacity work ahead of launch for the expected payment volume.</li>
+              <li>Datadog monitoring and Slack alerts so failed payments surfaced within minutes.</li>
+            </ul></dd></div>
+          </dl>
+          <p class="result"><span class="label">Result</span><span>The two regions added hundreds of payments a day.</span></p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="label">NetSuite</span>
+          <div class="tags"><span class="tag">accounting</span><span class="tag">data integrity</span></div>
+        </div>
+        <div class="case-body">
+          <h3>NetSuite accounting sync</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Every payment had to reach the accounting system accurately, and our own records had to agree with it.</dd></div>
+            <div><dt>What I built</dt><dd><ul>
+              <li>A sync that, for each payment, creates it in NetSuite, confirms the invoice exists there, marks the invoice paid, and only then updates our database.</li>
+              <li>Notifications on every success and failure, so finance could see where each payment stood.</li>
+            </ul></dd></div>
+          </dl>
+          <p class="result"><span class="label">Result</span><span>Payments reach accounting through one checked path, and failures are visible instead of silent.</span></p>
+        </div>
+      </article>
+    </div>
+
+    <p class="also">Alongside these I handled production payment support: investigating why individual Stripe and Airwallex payments failed and explaining the cause to customers, plus performance fixes and features across the main platform.</p>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <p class="label">Experience</p>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="roles">
+      <div class="role">
+        <span class="when">Nov 2023 – May 2026</span>
+        <div>
+          <h3>Software Engineer II <span>· Nivoda</span></h3>
+          <p>B2B diamond and gemstone marketplace serving 10,000+ retailers. Owned payments and reconciliation; worked daily with product, finance, accounting and operations in a fully remote team.</p>
+        </div>
+      </div>
+      <div class="role">
+        <span class="when">Oct 2022 – Oct 2023</span>
+        <div>
+          <h3>Software Engineer <span>· Deutics Global</span></h3>
+          <p>Full-stack work on live products with Node.js, Express, React and MongoDB. Built REST APIs and payment gateway integrations, deployed on AWS with CI/CD.</p>
+        </div>
+      </div>
+      <div class="role">
+        <span class="when">2019 – 2023</span>
+        <div>
+          <h3>B.S. Information Technology <span>· University of the Punjab</span></h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div><span class="label">Backend</span><p>Node.js, TypeScript, Express, GraphQL, REST, Kafka, Redis</p></div>
+      <div><span class="label">Data</span><p>PostgreSQL, query optimisation, zero-downtime migrations, MongoDB</p></div>
+      <div><span class="label">Payments</span><p>Stripe, Airwallex, NetSuite, webhooks, idempotency, multi-currency settlement</p></div>
+      <div><span class="label">Infra</span><p>AWS, Docker, CI/CD, Datadog, NGINX</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <p class="label">Contact</p>
+    <h2>Building something that moves money?</h2>
+    <p>I'm looking for remote roles at fintech and payments-heavy startups, full-time or contract. Email is the fastest way to reach me.</p>
+    <div class="email-row">
+      <span class="email" id="email">nmnashrf@gmail.com</span>
+      <button class="btn" id="copy" type="button">Copy email</button>
+      <a class="btn" href="https://linkedin.com/in/-nomanashraf" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/pheN0M1nal" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Noman Ashraf</span>
+    <span>Islamabad, Pakistan · 2026</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('copy');
+    var email = document.getElementById('email');
+    btn.addEventListener('click', function () {
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy email'; }, 1800); };
+      var fallback = function () {
+        var r = document.createRange(); r.selectNodeContents(email);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected, press Ctrl+C';
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email.textContent.trim()).then(done, fallback);
+      } else { fallback(); }
+    });
+  })();
+</script>
+</body>
+</html>
