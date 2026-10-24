@@ -173,9 +173,45 @@ section { padding-block: clamp(56px, 9vw, 96px) 0; }
 .email { font-family: var(--mono); font-size: clamp(1rem, 2.4vw, 1.25rem); user-select: all; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); overflow-wrap: anywhere; }
 button.btn { background: none; color: var(--ink); cursor: pointer; }
 footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+
+/* Phone view: a short link-in-bio screen. Desktop keeps the full site. Add ?full to the URL to see the full site on a phone. */
+.bio { display: none; }
+@media (max-width: 640px) {
+  html:not([data-full]) .wrap { display: none; }
+  html:not([data-full]) .bio { display: flex; }
+}
+.bio { min-height: 100vh; min-height: 100svh; box-sizing: border-box; flex-direction: column; justify-content: center; gap: 32px; padding: 40px 28px; max-width: 480px; margin: 0 auto; }
+.bio-meta { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--muted); }
+.bio h1 { font-family: var(--serif); font-weight: 400; font-size: 54px; line-height: 1.02; letter-spacing: -0.01em; margin: 0; }
+.bio h1 em { color: var(--accent); }
+.bio-line { font-family: var(--serif); font-size: 20px; line-height: 1.4; margin: 14px 0 0; }
+.bio-links { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--ink); }
+.bio-links a { display: flex; align-items: center; gap: 16px; min-height: 64px; padding: 0 4px; border-top: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 24px; }
+.bio-links a:hover, .bio-links a:focus-visible { background: var(--accent-soft); }
+.bio-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.bio-links span { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.bio-links b { flex-grow: 1; font-weight: 400; }
 </style>
+<script>
+  if (/[?&]full\b/.test(location.search)) document.documentElement.setAttribute('data-full', '');
+</script>
 </head>
 <body>
+
+<main class="bio" aria-label="Noman Ashraf">
+  <div class="bio-meta"><span>hello</span><span>islamabad, pakistan</span></div>
+  <div>
+    <h1>Noman<br><em>Ashraf.</em></h1>
+    <p class="bio-line">Making things. Learning how they work.</p>
+  </div>
+  <ul class="bio-links">
+    <li><a href="/?full"><span>01</span><b>Portfolio</b>&rarr;</a></li>
+    <li><a href="https://github.com/pheN0M1nal"><span>02</span><b>GitHub</b>&rarr;</a></li>
+    <li><a href="https://linkedin.com/in/-nomanashraf"><span>03</span><b>LinkedIn</b>&rarr;</a></li>
+    <li><a href="mailto:noman.ashraf.pro@gmail.com"><span>04</span><b>Say hello</b>&rarr;</a></li>
+  </ul>
+  <div class="bio-meta"><span>nomanashraf.com</span><span>2026</span></div>
+</main>
 
 <div class="wrap">
   <nav aria-label="Main">
