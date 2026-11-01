@@ -151,6 +151,40 @@ section { padding-block: clamp(56px, 9vw, 96px) 0; }
 
 .also { margin-top: 28px; color: var(--muted); max-width: 66ch; font-size: 1rem; }
 
+/* how I build (AI-first workflow) */
+.ai-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.panel { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 24px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.panel > p { font-size: 0.95rem; color: var(--muted); }
+.tree { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-family: var(--mono); font-size: 0.82rem; line-height: 1.5; }
+.tree li { display: grid; grid-template-columns: 13.5em minmax(0, 1fr); gap: 0 12px; }
+.tree code { font-family: inherit; color: var(--ink); white-space: nowrap; }
+.tree li.l1 code { padding-left: 1em; }
+.tree li.l2 code { padding-left: 2em; }
+.tree .dir { color: var(--accent); }
+.tree span { color: var(--muted); }
+@media (max-width: 520px) {
+  .tree li { grid-template-columns: 1fr; }
+  .tree li.l1 span { padding-left: 1em; }
+  .tree li.l2 span { padding-left: 2em; }
+}
+.steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 2px 12px; padding-block: 14px; border-top: 1px solid var(--rule); }
+.steps li:first-child { border-top: 0; padding-top: 0; }
+.steps li:last-child { padding-bottom: 0; }
+.steps .num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); padding-top: 4px; font-variant-numeric: tabular-nums; }
+.steps code { font-family: var(--mono); font-size: 0.95rem; }
+.steps p { grid-column: 2; color: var(--muted); font-size: 1rem; }
+.ai-notes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 48px; margin-top: 44px; }
+.ai-notes h3 { font-size: 1.3rem; margin-bottom: 10px; }
+.ai-notes p { color: var(--muted); max-width: 52ch; }
+.agent-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.agent-list li { color: var(--muted); }
+.agent-list b { display: block; font-family: var(--mono); font-size: 0.85rem; font-weight: 500; color: var(--ink); }
+.ai-proof { margin-top: 44px; display: grid; gap: 16px; }
+@media (max-width: 1100px) { .ai-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .ai-notes { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .result { flex-direction: column; gap: 6px; } }
+
 /* experience */
 .roles { display: grid; }
 .role { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 8px 48px; padding-block: 26px; border-top: 1px solid var(--rule); }
@@ -218,6 +252,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; display: f
     <a class="name" href="#top">Noman Ashraf</a>
     <ul>
       <li><a href="#work">Work</a></li>
+      <li><a href="#how-i-build">How I build</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -359,6 +394,58 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; display: f
     <p class="also">Alongside these I handled production payment support: investigating why individual Stripe and Airwallex payments failed and explaining the cause to customers, plus performance fixes and features across the main platform.</p>
   </section>
 
+  <section id="how-i-build">
+    <div class="section-head">
+      <p class="label">How I build · AI-first</p>
+      <h2>A structured way to build with AI</h2>
+      <p>I write software by directing AI agents: Claude Code, Codex and Cursor. It's the opposite of vibe coding. Every feature starts from a written spec, the agent works from context I set up on purpose, and every feature goes through the same steps.</p>
+    </div>
+
+    <div class="ai-grid">
+      <div class="panel">
+        <span class="label">The context folder</span>
+<ul class="tree" aria-label="Example repository layout">
+          <li><code class="dir">repo/</code></li>
+          <li class="l1"><code>CLAUDE.md</code><span>rules for Claude Code</span></li>
+          <li class="l1"><code>AGENTS.md</code><span>the same, for Codex</span></li>
+          <li class="l1"><code class="dir">context/</code></li>
+          <li class="l2"><code class="dir">features/</code><span>detailed spec per feature</span></li>
+          <li class="l2"><code>ai-interactions.md</code><span>log of AI sessions</span></li>
+          <li class="l2"><code>coding-standards.md</code><span>rules every change follows</span></li>
+        </ul>
+        <p>Example layout. CLAUDE.md and AGENTS.md link to these files, so every session starts from the same picture of the project.</p>
+      </div>
+
+      <div class="panel">
+        <span class="label">The feature lifecycle</span>
+        <ol class="steps">
+          <li><span class="num">01</span><code>feature load</code><p>Loads the feature's spec into context: everything the agent needs to know about it.</p></li>
+          <li><span class="num">02</span><code>feature start</code><p>Opens a new branch, breaks the work into to-dos and runs the tests.</p></li>
+          <li><span class="num">03</span><code>feature complete</code><p>Closes the feature out once its to-dos are done.</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="ai-notes">
+      <div>
+        <h3>Context, managed on purpose</h3>
+        <p>Context windows and tokens are a budget. I keep each session focused on the spec, the coding standards and the code it touches, so the agent understands the system as a whole instead of guessing from a single prompt.</p>
+      </div>
+      <div>
+        <h3>Agents I've built</h3>
+        <ul class="agent-list">
+          <li><b>UI optimisation check</b>Reviews new UI work for optimisation problems.</li>
+          <li><b>Security review</b>Reviews changes for security issues.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ai-proof">
+      <p class="result"><span class="label">In practice</span><span>This is how I'm building the RFP and quoting platform in my current role, as its only engineer: used daily by 200–300 people, with ~90% test coverage.</span></p>
+      <div class="tags"><span class="tag">Claude Code</span><span class="tag">Codex</span><span class="tag">Cursor</span><span class="tag">CLAUDE.md</span><span class="tag">AGENTS.md</span></div>
+    </div>
+  </section>
+
   <section id="experience">
     <div class="section-head">
       <p class="label">Experience</p>
@@ -368,8 +455,8 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; display: f
       <div class="role">
         <span class="when">Jul 2026 – Present</span>
         <div>
-          <h3>Software Engineer (Contract) <span>· US insurance company</span></h3>
-          <p>Sole engineer on the client's internal tools, placed through an engineering partner. Building Next.js and TypeScript apps for RFP and quoting workflows, with Microsoft Entra ID sign-in, deployed on Azure.</p>
+          <h3>Software Engineer (Contract) <span>· RFP &amp; quoting platform</span></h3>
+          <p>Sole engineer on an RFP and quoting platform for a US insurance company, placed through an engineering partner. Scoped and designed it end to end on Next.js, PostgreSQL, Prisma and queues, with Entra ID sign-in on Azure. Used daily by 200–300 people, saving each 2–3 hours a day.</p>
         </div>
       </div>
       <div class="role">
@@ -399,6 +486,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; display: f
       <div><span class="label">Data</span><p>PostgreSQL, query optimisation, zero-downtime migrations, MongoDB</p></div>
       <div><span class="label">Payments</span><p>Stripe, Airwallex, NetSuite, webhooks, idempotency, multi-currency settlement</p></div>
       <div><span class="label">Cloud &amp; infra</span><p>Azure, Entra ID, AWS, Docker, CI/CD, Datadog, NGINX</p></div>
+      <div><span class="label">AI workflow</span><p>Claude Code, Codex, Cursor, spec-driven development, custom agents</p></div>
     </div>
   </section>
 
